@@ -1,8 +1,16 @@
 package Agents;
 
 import java.util.Vector;
+import jade.core.Agent; //
 
-public class Taxi {
+import uchicago.src.sim.gui.SimGraphics;
+
+public class Taxi extends Agent {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static int counter = 0;
 
@@ -28,6 +36,7 @@ public class Taxi {
 	public void removePassenger(Passenger p){
 		passengers.remove(p);
 	}
+	
 	
 	
 

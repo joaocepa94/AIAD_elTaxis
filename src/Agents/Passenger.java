@@ -1,7 +1,14 @@
 package Agents;
 
-public class Passenger {
+import jade.core.Agent;
+
+public class Passenger extends Agent {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static int counter = 0;
 	
 	private Integer idPassenger;
