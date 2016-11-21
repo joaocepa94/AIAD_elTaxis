@@ -4,8 +4,6 @@ import java.awt.Image;
 import java.util.Vector;
 import jade.core.Agent; //
 
-import uchicago.src.sim.gui.SimGraphics;
-
 public class Taxi extends Agent {
 
 	/**

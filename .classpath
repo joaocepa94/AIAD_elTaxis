@@ -2,9 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="/Users/luiscarvalho/Documents/workspace/AIAD_TAXI/lib/jade.jar"/>
-	<classpathentry kind="lib" path="/Users/luiscarvalho/Documents/workspace/AIAD_TAXI/lib/SAJaS.jar"/>
-	<classpathentry kind="lib" path="/Users/luiscarvalho/Documents/workspace/AIAD_TAXI/lib/repastj.jar"/>
 	<classpathentry kind="lib" path="C:/Users/João Cepa/Desktop/Feup/AIAD_T03_3/lib/jade.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
