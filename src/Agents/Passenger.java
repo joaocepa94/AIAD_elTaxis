@@ -1,5 +1,7 @@
 package Agents;
 
+import java.awt.Image;
+
 import jade.core.Agent;
 
 public class Passenger extends Agent {
@@ -11,6 +13,7 @@ public class Passenger extends Agent {
 
 	private static int counter = 0;
 	
+	private static Image img;
 	private Integer idPassenger;
 	private Integer x, y;
 	private Boolean hasBaggage;
@@ -25,6 +28,14 @@ public class Passenger extends Agent {
 	
 	public Boolean hasBaggage(){
 		return hasBaggage;
+	}
+	
+	public static Image getImg() {
+		return img;
+	}
+
+	public static void setImg(Image img) {
+		Passenger.img = img;
 	}
 	
 	
