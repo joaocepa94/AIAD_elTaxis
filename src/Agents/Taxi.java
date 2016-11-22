@@ -9,7 +9,7 @@ public class Taxi extends Agent {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	/*private static final long serialVersionUID = 1L;
 
 	private static int counter = 0;
 
@@ -43,6 +43,11 @@ public class Taxi extends Agent {
 
 	public static void setImg(Image img) {
 		Taxi.img = img;
+	}*/
+	
+	@Override
+	protected void setup() {
+		System.out.println("Hello!!");
 	}
 	
 	
