@@ -1,19 +1,26 @@
 package Agents;
 
-import java.util.Vector;
+import uchicago.src.sim.gui.Drawable;
+import uchicago.src.sim.gui.SimGraphics;
 
-import jade.core.Agent;
+public class Central implements Drawable {
 
-public class Central extends Agent {
+	@Override
+	public void draw(SimGraphics arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	private Vector<Taxi> taxis = new Vector<Taxi>();
-	
-	
-	
-	
+	@Override
+	public int getX() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getY() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
