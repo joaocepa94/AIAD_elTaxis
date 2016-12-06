@@ -1,51 +1,42 @@
 package Agents;
 
-import java.awt.Color;
+import java.awt.Image;
 
-import uchicago.src.sim.gui.Drawable;
-import uchicago.src.sim.gui.SimGraphics;
-import uchicago.src.sim.space.Object2DTorus;
-import uchicago.src.sim.util.Random;
+import jade.core.Agent;
 
-public class Passenger implements Drawable {
+public class Passenger extends Agent {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-	int x, y;
-	private Color color;
-	private Object2DTorus space;
+	private static int counter = 0;
+	
+	private static Image img;
+	private Integer idPassenger;
+	private Integer x, y;
+	private Boolean hasBaggage;
 
-	public Passenger(int x, int y, Object2DTorus space) {
+	public Passenger(Integer x, Integer y, Boolean baggage){
+		this.idPassenger = counter++;
 		this.x = x;
 		this.y = y;
-		this.space = space;
-		this.color = Color.red;
+		this.hasBaggage = baggage;
 	}
 	
-	public void jump() {
-		space.putObjectAt(this.x, this.y, null);
-
-		do {
-			this.x = Random.uniform.nextIntFromTo(0, space.getSizeX() - 1);
-			this.y = Random.uniform.nextIntFromTo(0, space.getSizeY() - 1);
-		} while (space.getObjectAt(x, y) != null);
-
-		space.putObjectAt(x, y, this);
+	
+	public Boolean hasBaggage(){
+		return hasBaggage;
 	}
 	
-
-	public void draw(SimGraphics g) {
-		g.drawFastCircle(this.color);
+	public static Image getImg() {
+		return img;
 	}
 
-	public int getX() {
-		return this.x;
-	}
-
-	public int getY() {
-		return this.y;
+	public static void setImg(Image img) {
+		Passenger.img = img;
 	}
 	
-	public Color getColor() {
-		return color;
-	}
-
+	
 }
