@@ -2,10 +2,9 @@ package Launcher;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 
 import Agents.*;
-import gui.Map;
+import gui.Simulation;
 import jade.core.Runtime;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
@@ -13,14 +12,9 @@ import jade.wrapper.AgentController;
 import jade.wrapper.ContainerController;
 import jade.wrapper.StaleProxyException;
 
-public class Launcher extends JFrame {
+public class Launcher {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private Map map;
+	private Simulation simulation;
 
 	private int numberTaxisAgents;
 	private int numberPassengerAgents;
@@ -31,12 +25,10 @@ public class Launcher extends JFrame {
 
 	public Launcher() throws IOException {
 
-		this.map = new Map();
+		this.simulation = new Simulation();
 
-		this.numberTaxisAgents = 15;
-		this.numberPassengerAgents = 5;
-
-		getContentPane().add(map);
+		this.numberTaxisAgents = 6;
+		this.numberPassengerAgents = 1;
 
 	}
 
@@ -53,27 +45,46 @@ public class Launcher extends JFrame {
 		this.taxisAvaible = new ArrayList<Taxi>();
 		this.passengers = new ArrayList<Passenger>();
 
+		// creating taxi service
+
+		TaxiCenter taxiCenter = new TaxiCenter();
+		AgentController taxiService;
+
+		taxiService = this.mainContainer.acceptNewAgent("CentralTaxi", taxiCenter);
+		taxiService.start();
+
+		// creating taxis
 		for (int i = 0; i < this.numberTaxisAgents; i++) {
 
-			int x = 1;
-			int y = 1;
+			int numPassengers = 4; // (Math.random() * 4 + 0);
 
-			Taxi taxi = new Taxi(x, y);
+			int x = (int) (Math.random() * 20 + 1);
+			int y = (int) (Math.random() * 20 + 1);
 
+			Taxi taxi = new Taxi(x, y, numPassengers);
+
+			for (int j = 0; j < numPassengers; j++) {
+				
+				int xPassenger = (int) (Math.random() * x + y);
+				int yPassenger = (int) (Math.random() * x + y);
+
+				PassengerTaxi p = new PassengerTaxi(xPassenger, yPassenger);
+				
+				taxi.addPassenger(p);
+		
+			}
+		
 			AgentController taxiAgent;
 			taxiAgent = this.mainContainer.acceptNewAgent("TaxiAgent" + i, taxi);
 			taxiAgent.start();
 
 			taxisAvaible.add(taxi);
-
 		}
 
+		// creating passengers
 		for (int i = 0; i < this.numberPassengerAgents; i++) {
 
-			int x = 1;
-			int y = 1;
-
-			Passenger passenger = new Passenger(x, y, false);
+			Passenger passenger = new Passenger(10, 10, false);
 
 			AgentController passengerAgent;
 			passengerAgent = this.mainContainer.acceptNewAgent("PassengerAgent" + i, passenger);
@@ -96,6 +107,9 @@ public class Launcher extends JFrame {
 		Runtime rt = Runtime.instance();
 		Profile p1 = new ProfileImpl();
 
+		p1.setParameter(Profile.MAIN_HOST, "localhost");
+		p1.setParameter(Profile.GUI, "true");
+
 		this.mainContainer = rt.createMainContainer(p1);
 
 		begin();
@@ -106,13 +120,15 @@ public class Launcher extends JFrame {
 	 * Starting demonstration
 	 */
 	public void startFrame() {
-		setSize(700, 490);
-		setVisible(true);
+
+		this.simulation.startSimulation();
+
 	}
 
 	/*
 	 * Launching Service Taxi
 	 */
+
 	public static void main(String args[]) throws IOException, StaleProxyException {
 
 		Launcher n = new Launcher();
